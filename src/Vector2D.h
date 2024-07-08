@@ -12,6 +12,8 @@ public:
     Vector2D &Multiply(const Vector2D vector);
     Vector2D &Divide(const Vector2D vector);
 
+    Vector2D operator*(const int &i);
+
     float xcomponent;
     float ycomponent;
 };

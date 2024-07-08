@@ -17,7 +17,9 @@ set(SOURCE_FILES
         "src/TextureManager.cpp"
         "src/Vector2D.cpp"
         "src/GameObjects/Paddle.cpp"
-        "src/GameObjects/Ball.cpp")
+        "src/GameObjects/Ball.cpp"
+        "src/Collision.cpp"
+        )
         
 add_executable(first_pong ${SOURCE_FILES})
 

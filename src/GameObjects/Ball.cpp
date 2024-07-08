@@ -14,11 +14,16 @@ void Ball::update()
     m_ballPosition.xcomponent += m_ballVelocity.xcomponent * m_ballSpeed;
     m_ballPosition.xcomponent += m_ballVelocity.ycomponent * m_ballSpeed;
 
-    m_destRect.x = m_ballPosition.xcomponent;
-    m_destRect.y = m_ballPosition.ycomponent;
+    destRect.x = m_ballPosition.xcomponent;
+    destRect.y = m_ballPosition.ycomponent;
+}
+
+void Ball::changeVelocity()
+{
+    m_ballVelocity * -1;
 }
 
 void Ball::draw()
 {
-    TextureManager::Draw(m_ballTexture, m_srcRect, m_destRect);
+    TextureManager::Draw(m_ballTexture, srcRect, destRect);
 }

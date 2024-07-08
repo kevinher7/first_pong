@@ -15,18 +15,18 @@ void Paddle::init(const char *spritePath, int playerNumber, int windowWidth, int
         paddleXPosition = static_cast<float>(windowWidth - 16);
     }
 
-    m_destRect.x = paddleXPosition;
-    m_destRect.y = paddleYPosition;
+    destRect.x = paddleXPosition;
+    destRect.y = paddleYPosition;
 }
 
 void Paddle::update()
 {
     paddleYPosition += paddleVelocity.ycomponent * m_paddleSpeed;
 
-    m_destRect.y = paddleYPosition;
+    destRect.y = paddleYPosition;
 }
 
 void Paddle::draw()
 {
-    TextureManager::Draw(m_paddleTexture, m_srcRect, m_destRect);
+    TextureManager::Draw(m_paddleTexture, srcRect, destRect);
 }

@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include "GameObjects/GameObjects.h"
 #include "GameObjects/KeyboardComponent.h"
+#include "Collision.h"
 
 #include <iostream>
 
@@ -77,6 +78,12 @@ void Game::update()
     player1.update();
     player2.update();
     ball.update();
+
+    if (Collision::AABB(player2.destRect, ball.destRect) || Collision::AABB(player1.destRect, ball.destRect))
+    {
+        ball.changeVelocity();
+        std::cerr << "contact!\n";
+    }
 };
 
 void Game::render()

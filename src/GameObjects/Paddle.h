@@ -8,12 +8,12 @@ class Paddle
 {
 public:
     Paddle()
-        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, m_paddleTexture{nullptr}, m_paddleSpeed{3}, m_srcRect{0, 0, 16, 32}, m_destRect{paddleXPosition, paddleYPosition, 16, 80} {};
+        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, srcRect{0, 0, 16, 32}, destRect{paddleXPosition, paddleYPosition, 16, 80}, m_paddleTexture{nullptr}, m_paddleSpeed{3} {};
     Paddle(const Paddle &) noexcept
-        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, m_paddleTexture{nullptr}, m_paddleSpeed{3}, m_srcRect{0, 0, 16, 32}, m_destRect{paddleXPosition, paddleYPosition, 16, 80} {}
+        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, srcRect{0, 0, 16, 32}, destRect{paddleXPosition, paddleYPosition, 16, 80}, m_paddleTexture{nullptr}, m_paddleSpeed{3} {}
     Paddle &operator=(const Paddle &) noexcept = delete;
     Paddle(Paddle &&) noexcept
-        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, m_paddleTexture{nullptr}, m_paddleSpeed{3}, m_srcRect{0, 0, 16, 32}, m_destRect{paddleXPosition, paddleYPosition, 16, 80} {}
+        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, srcRect{0, 0, 16, 32}, destRect{paddleXPosition, paddleYPosition, 16, 80}, m_paddleTexture{nullptr}, m_paddleSpeed{3} {}
     Paddle &operator=(Paddle &&) = delete;
     ~Paddle() {}
 
@@ -25,10 +25,11 @@ public:
     float paddleXPosition;
     Vector2D paddleVelocity;
 
+    SDL_FRect srcRect, destRect;
+
 private:
     SDL_Texture *m_paddleTexture;
     float m_paddleSpeed;
-    SDL_FRect m_srcRect, m_destRect;
 };
 
 #endif

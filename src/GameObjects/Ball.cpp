@@ -1,6 +1,8 @@
 #include "Ball.h"
 #include "../TextureManager.h"
 
+#include <iostream>
+
 void Ball::init(const char *spritePath, int windowWidth, int windowHeight)
 {
     m_ballTexture = TextureManager::LoadTexture(spritePath);
@@ -12,15 +14,18 @@ void Ball::init(const char *spritePath, int windowWidth, int windowHeight)
 void Ball::update()
 {
     m_ballPosition.xcomponent += m_ballVelocity.xcomponent * m_ballSpeed;
-    m_ballPosition.xcomponent += m_ballVelocity.ycomponent * m_ballSpeed;
+    m_ballPosition.ycomponent += m_ballVelocity.ycomponent * m_ballSpeed;
 
     destRect.x = m_ballPosition.xcomponent;
     destRect.y = m_ballPosition.ycomponent;
 }
 
-void Ball::changeVelocity()
+void Ball::changeVelocity(Vector2D &paddleVelocity)
 {
     m_ballVelocity * -1;
+    m_ballVelocity.ycomponent += paddleVelocity.ycomponent;
+
+    std::cout << "v_x: " << m_ballVelocity.xcomponent << " v_y: " << m_ballVelocity.ycomponent << "\n";
 }
 
 void Ball::draw()

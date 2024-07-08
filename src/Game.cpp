@@ -79,10 +79,13 @@ void Game::update()
     player2.update();
     ball.update();
 
-    if (Collision::AABB(player2.destRect, ball.destRect) || Collision::AABB(player1.destRect, ball.destRect))
+    if (Collision::AABB(player1.destRect, ball.destRect))
     {
-        ball.changeVelocity();
-        std::cerr << "contact!\n";
+        ball.changeVelocity(player1.paddleVelocity);
+    }
+    if (Collision::AABB(player2.destRect, ball.destRect))
+    {
+        ball.changeVelocity(player2.paddleVelocity);
     }
 };
 

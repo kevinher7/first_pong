@@ -15,7 +15,7 @@ public:
     ~Ball() {}
 
     void init(const char *spritePath, int windowWidth, int windowHeight);
-    void changeVelocity();
+    void changeVelocity(Vector2D &paddleVelocity);
 
     void update();
     void draw();

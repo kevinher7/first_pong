@@ -2,6 +2,8 @@
 #include "../TextureManager.h"
 #include "../Collision.h"
 
+#include <iostream>
+
 void Paddle::init(const char *spritePath, int playerNumber, int windowWidth, int windowHeight)
 {
     m_paddleTexture = TextureManager::LoadTexture(spritePath);
@@ -22,15 +24,19 @@ void Paddle::init(const char *spritePath, int playerNumber, int windowWidth, int
 
 void Paddle::update()
 {
-    if (Collision::windowTBCollision(destRect))
+    if (paddleYPosition <= 0)
     {
-        paddleYPosition = 0.0f;
+        paddleYPosition = 0;
     }
-    else
+
+    if (paddleYPosition >= 480 - destRect.h)
     {
-        paddleYPosition += paddleVelocity.ycomponent * m_paddleSpeed;
-        destRect.y = paddleYPosition;
+        std::cout << "touched bottom\n";
+        paddleYPosition = 480 - destRect.h;
     }
+
+    paddleYPosition += paddleVelocity.ycomponent * m_paddleSpeed;
+    destRect.y = paddleYPosition;
 }
 
 void Paddle::draw()

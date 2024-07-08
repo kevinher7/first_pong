@@ -1,6 +1,8 @@
 #include "Paddle.h"
 #include "../Game.h"
 
+#include <iostream>
+
 class KeyboardComponent
 {
 public:
@@ -16,12 +18,16 @@ public:
     {
         if (Game::event.type == SDL_EVENT_KEY_DOWN)
         {
-            if (Game::event.key.keysym.sym == upKey)
+            if (Game::event.key.keysym.sym == upKey && paddleObject.destRect.y > 0)
             {
+                std::cout << "preseed up\n";
+
                 paddleObject.paddleVelocity.ycomponent = -1;
             }
-            else if (Game::event.key.keysym.sym == downKey)
+            else if (Game::event.key.keysym.sym == downKey && paddleObject.destRect.y < 480 - paddleObject.destRect.h)
             {
+                std::cout << "preseed down\n";
+
                 paddleObject.paddleVelocity.ycomponent = 1;
             }
         }

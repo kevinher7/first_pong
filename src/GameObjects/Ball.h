@@ -16,6 +16,7 @@ public:
 
     void init(const char *spritePath, int windowWidth, int windowHeight);
     void changeVelocity(Vector2D &paddleVelocity);
+    void wallBounceVelocityChange();
 
     void update();
     void draw();

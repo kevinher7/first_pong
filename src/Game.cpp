@@ -12,7 +12,8 @@ Paddle player1{};
 Paddle player2{};
 Ball ball;
 
-KeyboardComponent keyboardComponent{player1, player2};
+KeyboardComponent keyboardComponentP1{player1, SDLK_w, SDLK_s};
+KeyboardComponent keyboardComponentP2{player2, SDLK_UP, SDLK_DOWN};
 
 void Game::initGame(const char *windowTitle, int windowWidth, int windowHeight)
 {
@@ -74,7 +75,8 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    keyboardComponent.update();
+    keyboardComponentP1.update();
+    keyboardComponentP2.update();
     player1.update();
     player2.update();
     ball.update();
@@ -86,6 +88,11 @@ void Game::update()
     if (Collision::AABB(player2.destRect, ball.destRect))
     {
         ball.changeVelocity(player2.paddleVelocity);
+    }
+
+    if (Collision::windowTBCollision(ball.destRect))
+    {
+        ball.wallBounceVelocityChange();
     }
 };
 

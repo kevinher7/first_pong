@@ -5,7 +5,7 @@ class KeyboardComponent
 {
 public:
     KeyboardComponent() = delete;
-    KeyboardComponent(Paddle &playerOne, Paddle &playerTwo) : paddleObjectOne{playerOne}, paddleObjectTwo{playerTwo} {}
+    KeyboardComponent(Paddle &playerPaddle, SDL_Keycode up, SDL_Keycode down) : paddleObject{playerPaddle}, upKey{up}, downKey{down} {}
     KeyboardComponent(const KeyboardComponent &) = delete;
     KeyboardComponent &operator=(const KeyboardComponent &) = delete;
     KeyboardComponent(KeyboardComponent &&) = delete;
@@ -16,55 +16,30 @@ public:
     {
         if (Game::event.type == SDL_EVENT_KEY_DOWN)
         {
-            switch (Game::event.key.keysym.sym)
+            if (Game::event.key.keysym.sym == upKey)
             {
-            // Player one controls
-            case SDLK_w:
-                paddleObjectOne.paddleVelocity.ycomponent = -1;
-                break;
-            case SDLK_s:
-                paddleObjectOne.paddleVelocity.ycomponent = 1;
-                break;
-
-            // Player two controls
-            case SDLK_UP:
-                paddleObjectTwo.paddleVelocity.ycomponent = -1;
-                break;
-            case SDLK_DOWN:
-                paddleObjectTwo.paddleVelocity.ycomponent = 1;
-                break;
-
-            default:
-                break;
+                paddleObject.paddleVelocity.ycomponent = -1;
+            }
+            else if (Game::event.key.keysym.sym == downKey)
+            {
+                paddleObject.paddleVelocity.ycomponent = 1;
             }
         }
 
         if (Game::event.type == SDL_EVENT_KEY_UP)
         {
-            switch (Game::event.key.keysym.sym)
+            if (Game::event.key.keysym.sym == upKey)
             {
-            // Player one controls
-            case SDLK_w:
-                paddleObjectOne.paddleVelocity.ycomponent = 0;
-                break;
-            case SDLK_s:
-                paddleObjectOne.paddleVelocity.ycomponent = 0;
-                break;
-
-            // Player two controls
-            case SDLK_UP:
-                paddleObjectTwo.paddleVelocity.ycomponent = 0;
-                break;
-            case SDLK_DOWN:
-                paddleObjectTwo.paddleVelocity.ycomponent = 0;
-                break;
-
-            default:
-                break;
+                paddleObject.paddleVelocity.ycomponent = 0;
+            }
+            else if (Game::event.key.keysym.sym == downKey)
+            {
+                paddleObject.paddleVelocity.ycomponent = 0;
             }
         }
     }
 
-    Paddle &paddleObjectOne;
-    Paddle &paddleObjectTwo;
+    Paddle &paddleObject;
+    SDL_Keycode upKey;
+    SDL_Keycode downKey;
 };

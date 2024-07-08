@@ -1,5 +1,6 @@
 #include "Paddle.h"
 #include "../TextureManager.h"
+#include "../Collision.h"
 
 void Paddle::init(const char *spritePath, int playerNumber, int windowWidth, int windowHeight)
 {
@@ -21,9 +22,15 @@ void Paddle::init(const char *spritePath, int playerNumber, int windowWidth, int
 
 void Paddle::update()
 {
-    paddleYPosition += paddleVelocity.ycomponent * m_paddleSpeed;
-
-    destRect.y = paddleYPosition;
+    if (Collision::windowTBCollision(destRect))
+    {
+        paddleYPosition = 0.0f;
+    }
+    else
+    {
+        paddleYPosition += paddleVelocity.ycomponent * m_paddleSpeed;
+        destRect.y = paddleYPosition;
+    }
 }
 
 void Paddle::draw()

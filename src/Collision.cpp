@@ -13,3 +13,27 @@ bool Collision::AABB(const SDL_FRect &recA, const SDL_FRect &recB)
 
     return false;
 }
+
+bool Collision::windowTBCollision(const SDL_FRect &recObject)
+{
+    if (recObject.y <= 0 || recObject.y >= 480 - recObject.h)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+int Collision::goalCollision(const SDL_FRect &recObject)
+{
+    if (recObject.x <= 0)
+    {
+        return 1;
+    }
+    if (recObject.x >= (720.0f - recObject.w))
+    {
+        return 2;
+    }
+
+    return 0;
+}

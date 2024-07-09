@@ -9,11 +9,9 @@ class Paddle
 public:
     Paddle()
         : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, srcRect{0, 0, 16, 32}, destRect{paddleXPosition, paddleYPosition, 16, 80}, m_paddleTexture{nullptr}, m_paddleSpeed{5} {};
-    Paddle(const Paddle &) noexcept
-        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, srcRect{0, 0, 16, 32}, destRect{paddleXPosition, paddleYPosition, 16, 80}, m_paddleTexture{nullptr}, m_paddleSpeed{5} {}
-    Paddle &operator=(const Paddle &) noexcept = delete;
-    Paddle(Paddle &&) noexcept
-        : paddleYPosition{0.0f}, paddleXPosition{0.0f}, paddleVelocity{0.0f, 0.0f}, srcRect{0, 0, 16, 32}, destRect{paddleXPosition, paddleYPosition, 16, 80}, m_paddleTexture{nullptr}, m_paddleSpeed{5} {}
+    Paddle(const Paddle &) = delete;
+    Paddle &operator=(const Paddle &) = delete;
+    Paddle(Paddle &&) = delete;
     Paddle &operator=(Paddle &&) = delete;
     ~Paddle() {}
 

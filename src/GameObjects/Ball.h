@@ -8,9 +8,9 @@ class Ball
 {
 public:
     Ball() : srcRect{0, 0, 32, 32}, destRect{0.0f, 0.0f, 16.0f, 16.0f}, m_ballTexture{nullptr}, m_ballPosition{0.0f, 0.0f}, m_ballVelocity{1.0f, 0.5f}, m_ballSpeed{3.0f}, m_speedMultiplier{1.1f} {}
-    Ball(const Ball &) noexcept = delete;
-    Ball &operator=(const Ball &) noexcept = delete;
-    Ball(Ball &&) noexcept = delete;
+    Ball(const Ball &) = delete;
+    Ball &operator=(const Ball &) = delete;
+    Ball(Ball &&) = delete;
     Ball &operator=(Ball &&) = delete;
     ~Ball() {}
 

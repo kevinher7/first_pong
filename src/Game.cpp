@@ -98,7 +98,8 @@ void Game::update()
 
     if (Collision::goalCollision(ball.destRect))
     {
-        }
+        end(Collision::goalCollision(ball.destRect));
+    }
 };
 
 void Game::render()
@@ -109,6 +110,42 @@ void Game::render()
     ball.draw();
     SDL_RenderPresent(gameRenderer);
 };
+
+void Game::end(int loserPlayer)
+{
+    SDL_Texture *gameOverTex = TextureManager::LoadTexture("./assets/GameOver.png");
+
+    SDL_Texture *winnerPlayerTex{nullptr};
+    if (loserPlayer == 1)
+    {
+        winnerPlayerTex = TextureManager::LoadTexture("./assets/player2_winscreen.png");
+    }
+    else
+    {
+        winnerPlayerTex = TextureManager::LoadTexture("./assets/player1_winscreen.png");
+    }
+
+    SDL_RenderClear(gameRenderer);
+    player1.draw();
+    player2.draw();
+    TextureManager::Draw(gameOverTex, {0.0f, 0.0f, 350.0f, 100.0f}, {360.0f - 350.0f / 2, 240.0f - 100.0f / 2 - 25, 350.0f, 100.0f});
+    TextureManager::Draw(winnerPlayerTex, {0.0f, 0.0f, 350.0f, 50.0f}, {360.0f - 350.0f / 2, 240.0f - 50.0f / 2 + 25, 350.0f, 50.0f});
+    SDL_RenderPresent(gameRenderer);
+
+    bool quit = 0;
+    while (!quit)
+    {
+        if (SDL_WaitEvent(&event))
+        {
+            if (event.type == SDL_EVENT_QUIT)
+            {
+                quit = true;
+            }
+        }
+    }
+
+    m_isRunning = 0;
+}
 
 void Game::clean()
 {

@@ -21,6 +21,8 @@ public:
     void render();
     void clean();
 
+    void end(int winnerPlayer);
+
     bool running(); // podria hacerse bool running() const;
 
     inline static SDL_Renderer *gameRenderer{nullptr};

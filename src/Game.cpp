@@ -10,7 +10,7 @@ SDL_Event Game::event;
 
 Paddle player1{};
 Paddle player2{};
-Ball ball;
+Ball ball{};
 
 KeyboardComponent keyboardComponentP1{player1, SDLK_w, SDLK_s};
 KeyboardComponent keyboardComponentP2{player2, SDLK_UP, SDLK_DOWN};
@@ -83,17 +83,22 @@ void Game::update()
 
     if (Collision::AABB(player1.destRect, ball.destRect))
     {
-        ball.changeVelocity(player1.paddleVelocity);
+        ball.handleBounce(player1.destRect, player1.paddleVelocity);
     }
+
     if (Collision::AABB(player2.destRect, ball.destRect))
     {
-        ball.changeVelocity(player2.paddleVelocity);
+        ball.handleBounce(player2.destRect, player2.paddleVelocity);
     }
 
     if (Collision::windowTBCollision(ball.destRect))
     {
-        ball.wallBounceVelocityChange();
+        ball.handleWallBounce();
     }
+
+    if (Collision::goalCollision(ball.destRect))
+    {
+        }
 };
 
 void Game::render()

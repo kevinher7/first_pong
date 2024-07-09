@@ -29,10 +29,10 @@ Vector2D &Vector2D::Divide(const Vector2D vector)
     return *this;
 }
 
-Vector2D Vector2D::operator*(const int &i)
+Vector2D Vector2D::operator*(const float &i)
 {
-    this->xcomponent *= static_cast<float>(i);
-    this->ycomponent *= static_cast<float>(i);
+    this->xcomponent *= i;
+    this->ycomponent *= i;
 
     return *this;
 }

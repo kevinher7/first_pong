@@ -24,17 +24,54 @@ void Ball::update()
     destRect.y = m_ballPosition.ycomponent;
 }
 
-void Ball::changeVelocity(Vector2D &paddleVelocity)
-{
-    m_ballVelocity.xcomponent *= -1;
-    m_ballVelocity.ycomponent += paddleVelocity.ycomponent;
-
-    std::cout << "v_x: " << m_ballVelocity.xcomponent << " v_y: " << m_ballVelocity.ycomponent << "\n";
-}
-
-void Ball::wallBounceVelocityChange()
+void Ball::handleWallBounce()
 {
     m_ballVelocity.ycomponent *= -1;
+}
+
+void Ball::handleBounce(SDL_FRect collisioningRec, Vector2D &paddleVelocity)
+{
+    float hitboxHeight = collisioningRec.h / 3;
+    float currentHit = destRect.y - collisioningRec.y;
+
+    if (m_ballVelocity.ycomponent > 0)
+    {
+        if (currentHit < hitboxHeight)
+        {
+            m_ballVelocity.xcomponent *= -1.0f;
+            m_ballVelocity.ycomponent *= -1.0f;
+            m_ballSpeed *= m_speedMultiplier;
+        }
+        else if (currentHit < 2 * hitboxHeight)
+        {
+            m_ballVelocity.xcomponent *= -1;
+        }
+        else if (currentHit < 3 * hitboxHeight)
+        {
+            m_ballVelocity.xcomponent *= -1.0f;
+            m_ballSpeed *= m_speedMultiplier;
+        }
+    }
+    else
+    {
+        if (currentHit < hitboxHeight)
+        {
+            m_ballVelocity.xcomponent *= -1.0f;
+            m_ballSpeed *= m_speedMultiplier;
+        }
+        else if (currentHit < 2 * hitboxHeight)
+        {
+            m_ballVelocity.xcomponent *= -1;
+        }
+        else if (currentHit < 3 * hitboxHeight)
+        {
+            m_ballVelocity.xcomponent *= -1.0f;
+            m_ballVelocity.ycomponent *= -1.0f;
+            m_ballSpeed *= m_speedMultiplier;
+        }
+    }
+
+    m_ballVelocity.ycomponent += paddleVelocity.ycomponent;
 }
 
 void Ball::draw()
